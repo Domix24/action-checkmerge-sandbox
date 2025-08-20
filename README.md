@@ -1,4 +1,5 @@
 # Action Checkmerge
+
 Auto-merge with all required checks completed
 
 [![GitHub Super-Linter](https://github.com/Domix24/action-checkmerge/actions/workflows/linter.yml/badge.svg)](https://github.com/Domix24/action-checkmerge/actions/workflows/linter.yml)

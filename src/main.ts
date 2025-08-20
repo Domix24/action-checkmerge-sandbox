@@ -9,10 +9,14 @@ import * as core from '@actions/core'
  */
 export async function run(): Promise<void> {
   try {
-    const token = "(token)"
+    const token = '(token)'
     console.log(token)
-    core.info(arguments.length + "")
+    core.info(arguments.length + '')
   } catch (error) {
+    if (error instanceof Error) {
+      core.error(error)
+    } else {
+      core.error('Unexpected')
+    }
   }
 }
-
