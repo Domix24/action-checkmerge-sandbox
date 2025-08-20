@@ -31243,7 +31243,7 @@ async function run() {
     try {
         const token = coreExports.getInput('token');
         //    const octokit = github.getOctokit(token)
-        if (githubExports.context.action === 'pull_request')
+        if (githubExports.context.eventName === 'pull_request')
             throw new Error('Not a pull request');
         console.log(githubExports.context.action);
         console.log(githubExports.context.eventName);

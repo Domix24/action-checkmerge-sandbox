@@ -12,7 +12,7 @@ export async function run(): Promise<void> {
     const token = core.getInput('token')
     //    const octokit = github.getOctokit(token)
 
-    if (github.context.action === 'pull_request')
+    if (github.context.eventName === 'pull_request')
       throw new Error('Not a pull request')
 
     console.log(github.context.action)
