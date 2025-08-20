@@ -28,21 +28,6 @@ import require$$0$9 from 'diagnostics_channel';
 import require$$2$3 from 'child_process';
 import require$$6$1 from 'timers';
 
-function _mergeNamespaces(n, m) {
-	m.forEach(function (e) {
-		e && typeof e !== 'string' && !Array.isArray(e) && Object.keys(e).forEach(function (k) {
-			if (k !== 'default' && !(k in n)) {
-				var d = Object.getOwnPropertyDescriptor(e, k);
-				Object.defineProperty(n, k, d.get ? d : {
-					enumerable: true,
-					get: function () { return e[k]; }
-				});
-			}
-		});
-	});
-	return Object.freeze(n);
-}
-
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function getDefaultExportFromCjs (x) {
@@ -27294,7 +27279,7 @@ function requireCore () {
 
 var coreExports = requireCore();
 
-var github$2 = {};
+var github = {};
 
 var context = {};
 
@@ -31201,9 +31186,9 @@ function requireUtils () {
 var hasRequiredGithub;
 
 function requireGithub () {
-	if (hasRequiredGithub) return github$2;
+	if (hasRequiredGithub) return github;
 	hasRequiredGithub = 1;
-	var __createBinding = (github$2 && github$2.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+	var __createBinding = (github && github.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 	    if (k2 === undefined) k2 = k;
 	    var desc = Object.getOwnPropertyDescriptor(m, k);
 	    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
@@ -31214,23 +31199,23 @@ function requireGithub () {
 	    if (k2 === undefined) k2 = k;
 	    o[k2] = m[k];
 	}));
-	var __setModuleDefault = (github$2 && github$2.__setModuleDefault) || (Object.create ? (function(o, v) {
+	var __setModuleDefault = (github && github.__setModuleDefault) || (Object.create ? (function(o, v) {
 	    Object.defineProperty(o, "default", { enumerable: true, value: v });
 	}) : function(o, v) {
 	    o["default"] = v;
 	});
-	var __importStar = (github$2 && github$2.__importStar) || function (mod) {
+	var __importStar = (github && github.__importStar) || function (mod) {
 	    if (mod && mod.__esModule) return mod;
 	    var result = {};
 	    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
 	    __setModuleDefault(result, mod);
 	    return result;
 	};
-	Object.defineProperty(github$2, "__esModule", { value: true });
-	github$2.getOctokit = github$2.context = void 0;
+	Object.defineProperty(github, "__esModule", { value: true });
+	github.getOctokit = github.context = void 0;
 	const Context = __importStar(requireContext());
 	const utils_1 = requireUtils();
-	github$2.context = new Context.Context();
+	github.context = new Context.Context();
 	/**
 	 * Returns a hydrated octokit ready to use for GitHub Actions
 	 *
@@ -31241,18 +31226,12 @@ function requireGithub () {
 	    const GitHubWithPlugins = utils_1.GitHub.plugin(...additionalPlugins);
 	    return new GitHubWithPlugins((0, utils_1.getOctokitOptions)(token, options));
 	}
-	github$2.getOctokit = getOctokit;
+	github.getOctokit = getOctokit;
 	
-	return github$2;
+	return github;
 }
 
 var githubExports = requireGithub();
-var github = /*@__PURE__*/getDefaultExportFromCjs(githubExports);
-
-var github$1 = /*#__PURE__*/_mergeNamespaces({
-	__proto__: null,
-	default: github
-}, [githubExports]);
 
 //import { wait } from './wait.js'
 /**
@@ -31262,15 +31241,15 @@ var github$1 = /*#__PURE__*/_mergeNamespaces({
  */
 async function run() {
     try {
-        const token = '(token)';
-        console.log(token);
+        const token = coreExports.getInput('token');
+        //    const octokit = github.getOctokit(token)
+        console.log(githubExports.context.action);
+        console.log(githubExports.context.eventName);
+        console.log(githubExports.context.eventName == 'pull_request');
+        console.log(githubExports.context.action == 'pull_request');
         console.log('--');
         console.log(githubExports.context);
-        console.log('--');
-        console.log(github$1);
-        console.log('--');
-        console.log(coreExports.getInput('token'));
-        console.log('--');
+        console.log(token);
         coreExports.info(arguments.length + '');
     }
     catch (error) {

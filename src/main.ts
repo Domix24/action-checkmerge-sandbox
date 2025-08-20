@@ -10,12 +10,14 @@ import * as github from '@actions/github'
 export async function run(): Promise<void> {
   try {
     const token = core.getInput('token')
-//    const octokit = github.getOctokit(token)
+    //    const octokit = github.getOctokit(token)
 
     console.log(github.context.action)
-    console.log(github.context.action == "pull_request")
+    console.log(github.context.eventName)
+    console.log(github.context.eventName == 'pull_request')
+    console.log(github.context.action == 'pull_request')
 
-    console.log("--")
+    console.log('--')
     console.log(github.context)
     console.log(token)
     core.info(arguments.length + '')
