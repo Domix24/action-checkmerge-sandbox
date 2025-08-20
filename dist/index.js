@@ -31242,20 +31242,18 @@ var githubExports = requireGithub();
 async function run() {
     try {
         const token = coreExports.getInput('token');
-        //    const octokit = github.getOctokit(token)
-        //    console.log(github.context.eventName == 'pull_request')
-        console.log(githubExports.context.eventName);
+        const octokit = githubExports.getOctokit(token);
         if (githubExports.context.eventName !== 'pull_request')
             throw new Error('Not a pull request');
-        if (githubExports.context.action == 'op')
-            console.log('hey');
-        console.log(githubExports.context.action);
-        console.log(githubExports.context.eventName);
-        console.log(githubExports.context.action == 'pull_request');
+        const info = await octokit.rest.pulls.get({
+            owner: githubExports.context.repo.owner,
+            pull_number: githubExports.context.payload.pull_request.number,
+            repo: githubExports.context.repo.repo
+        });
+        console.log(info);
         console.log('--');
         console.log(githubExports.context);
         console.log(token);
-        coreExports.info(arguments.length + '');
     }
     catch (error) {
         if (error instanceof Error) {

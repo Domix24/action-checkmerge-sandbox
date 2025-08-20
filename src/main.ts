@@ -10,23 +10,21 @@ import * as github from '@actions/github'
 export async function run(): Promise<void> {
   try {
     const token = core.getInput('token')
-    //    const octokit = github.getOctokit(token)
+    const octokit = github.getOctokit(token)
 
-    //    console.log(github.context.eventName == 'pull_request')
-    console.log(github.context.eventName)
     if (github.context.eventName !== 'pull_request')
       throw new Error('Not a pull request')
 
-    if (github.context.action == 'op') console.log('hey')
+    const info = await octokit.rest.pulls.get({
+      owner: github.context.repo.owner,
+      pull_number: github.context.payload.pull_request!.number,
+      repo: github.context.repo.repo
+    })
 
-    console.log(github.context.action)
-    console.log(github.context.eventName)
-    console.log(github.context.action == 'pull_request')
-
+    console.log(info)
     console.log('--')
     console.log(github.context)
     console.log(token)
-    core.info(arguments.length + '')
   } catch (error) {
     if (error instanceof Error) {
       core.setFailed(error)
