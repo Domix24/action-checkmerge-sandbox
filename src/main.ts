@@ -12,10 +12,12 @@ export async function run(): Promise<void> {
     const token = core.getInput('token')
     //    const octokit = github.getOctokit(token)
 
-    console.log(github.context.eventName == 'pull_request')
+    //    console.log(github.context.eventName == 'pull_request')
     console.log(github.context.eventName)
     if (github.context.eventName !== 'pull_request')
       throw new Error('Not a pull request')
+
+    if (github.context.action == 'op') console.log('hey')
 
     console.log(github.context.action)
     console.log(github.context.eventName)

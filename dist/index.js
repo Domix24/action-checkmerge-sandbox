@@ -31243,11 +31243,14 @@ async function run() {
     try {
         const token = coreExports.getInput('token');
         //    const octokit = github.getOctokit(token)
-        if (githubExports.context.eventName === 'pull_request')
+        //    console.log(github.context.eventName == 'pull_request')
+        console.log(githubExports.context.eventName);
+        if (githubExports.context.eventName !== 'pull_request')
             throw new Error('Not a pull request');
+        if (githubExports.context.action == 'op')
+            console.log('hey');
         console.log(githubExports.context.action);
         console.log(githubExports.context.eventName);
-        console.log(githubExports.context.eventName == 'pull_request');
         console.log(githubExports.context.action == 'pull_request');
         console.log('--');
         console.log(githubExports.context);
@@ -31256,10 +31259,10 @@ async function run() {
     }
     catch (error) {
         if (error instanceof Error) {
-            coreExports.error(error.message);
+            coreExports.setFailed(error);
         }
         else {
-            coreExports.error('Unexpected');
+            coreExports.setFailed('Unexpected');
         }
     }
 }
