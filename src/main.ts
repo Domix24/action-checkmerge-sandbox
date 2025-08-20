@@ -14,6 +14,10 @@ export async function run(): Promise<void> {
     console.log('--')
     console.log(github.context)
     console.log('--')
+    console.log(github)
+    console.log('--')
+    console.log(core.getInput('token'))
+    console.log('--')
     core.info(arguments.length + '')
   } catch (error) {
     if (error instanceof Error) {
