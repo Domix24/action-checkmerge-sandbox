@@ -31243,14 +31243,15 @@ async function run() {
     try {
         const token = coreExports.getInput('token');
         const octokit = githubExports.getOctokit(token);
+        console.log(githubExports.context.eventName);
         if (githubExports.context.eventName !== 'pull_request')
             throw new Error('Not a pull request');
-        const info = await octokit.rest.pulls.get({
+        const { data: pull_request } = await octokit.rest.pulls.get({
             owner: githubExports.context.repo.owner,
             pull_number: githubExports.context.payload.pull_request.number,
             repo: githubExports.context.repo.repo
         });
-        console.log(info);
+        console.log(pull_request);
         console.log('--');
         console.log(githubExports.context);
         console.log(token);
