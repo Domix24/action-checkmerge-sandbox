@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-//import * as github from '@actions/github'
+import * as github from '@actions/github'
 //import { wait } from './wait.js'
 
 /**
@@ -11,6 +11,9 @@ export async function run(): Promise<void> {
   try {
     const token = '(token)'
     console.log(token)
+    console.log('--')
+    console.log(github.context)
+    console.log('--')
     core.info(arguments.length + '')
   } catch (error) {
     if (error instanceof Error) {
