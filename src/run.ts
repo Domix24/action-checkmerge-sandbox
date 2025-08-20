@@ -1,7 +1,7 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
-//import { wait } from './wait.js'
 
+//import { wait } from './wait.js'
 /**
  * The main function for the action.
  *
@@ -11,8 +11,7 @@ export async function run(): Promise<void> {
   try {
     const token = core.getInput('token')
     //    const octokit = github.getOctokit(token)
-
-    if (github.context.eventName !== 'pull_request')
+    if (github.context.eventName === 'pull_request')
       throw new Error('Not a pull request')
 
     console.log(github.context.action)

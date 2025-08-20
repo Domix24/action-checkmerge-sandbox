@@ -31256,7 +31256,7 @@ async function run() {
     }
     catch (error) {
         if (error instanceof Error) {
-            coreExports.error(error);
+            coreExports.error(error.message);
         }
         else {
             coreExports.error('Unexpected');
