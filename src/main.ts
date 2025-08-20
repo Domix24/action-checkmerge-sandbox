@@ -9,15 +9,14 @@ import * as github from '@actions/github'
  */
 export async function run(): Promise<void> {
   try {
-    const token = '(token)'
-    console.log(token)
-    console.log('--')
+    const token = core.getInput('token')
+    const octokit = github.getOctokit(token)
+
+    console.log(github.context.action)
+    console.log(github.context.action == "pull_request")
+
+    console.log("--")
     console.log(github.context)
-    console.log('--')
-    console.log(github)
-    console.log('--')
-    console.log(core.getInput('token'))
-    console.log('--')
     core.info(arguments.length + '')
   } catch (error) {
     if (error instanceof Error) {
