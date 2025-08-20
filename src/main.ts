@@ -12,12 +12,13 @@ export async function run(): Promise<void> {
     const token = core.getInput('token')
     //    const octokit = github.getOctokit(token)
 
+    console.log(github.context.eventName == 'pull_request')
+    console.log(github.context.eventName)
     if (github.context.eventName !== 'pull_request')
       throw new Error('Not a pull request')
 
     console.log(github.context.action)
     console.log(github.context.eventName)
-    console.log(github.context.eventName == 'pull_request')
     console.log(github.context.action == 'pull_request')
 
     console.log('--')
@@ -26,9 +27,9 @@ export async function run(): Promise<void> {
     core.info(arguments.length + '')
   } catch (error) {
     if (error instanceof Error) {
-      core.error(error.message)
+      core.setFailed(error)
     } else {
-      core.error('Unexpected')
+      core.setFailed('Unexpected')
     }
   }
 }
