@@ -76,3 +76,5 @@ jobs:
         with:
           name: linter-reports
           path: ${{ github.workspace }}
+          include-hidden-files: true
+          retention-days: 1
