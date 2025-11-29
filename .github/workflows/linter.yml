@@ -54,3 +54,9 @@ jobs:
           VALIDATE_JSCPD: false
           VALIDATE_TYPESCRIPT_ES: false
           VALIDATE_JSON: false
+      
+      - name: Upload Linter Artifacts
+        if: failure() && steps.super-linter.outcome == 'failure'
+        uses: actions/upload-artifact@v3
+        with:
+          name: linter-reports
