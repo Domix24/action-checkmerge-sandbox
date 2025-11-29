@@ -54,9 +54,9 @@ jobs:
           VALIDATE_JSCPD: false
           VALIDATE_TYPESCRIPT_ES: false
           VALIDATE_JSON: false
-      
+
       - name: Fix linting issues
-        if: steps.super-linter.outcome == 'failure'
+        if: failure() && steps.super-linter.outcome == 'failure'
         uses: super-linter/super-linter/slim@v8
         env:
           DEFAULT_BRANCH: main
@@ -71,7 +71,7 @@ jobs:
           FIX_GITHUB_ACTIONS_ZIZMOR: true
 
       - name: Upload Linter Artifacts
-        if: steps.super-linter.outcome == 'failure'
+        if: failure() && steps.super-linter.outcome == 'failure'
         uses: actions/upload-artifact@v5
         with:
           name: linter-reports
