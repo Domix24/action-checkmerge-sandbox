@@ -31252,8 +31252,9 @@ async function run() {
         const token = coreExports.getInput('token');
         const octokit = githubExports.getOctokit(token);
         console.log(githubExports.context.eventName);
+        // This action only works on pull_request events.
         if (githubExports.context.eventName !== 'pull_request')
-            throw new Error('Not a pull request');
+            return;
         const { data: pull_request } = await octokit.rest.pulls.get({
             owner: githubExports.context.repo.owner,
             pull_number: githubExports.context.payload.pull_request.number,

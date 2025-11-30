@@ -14,8 +14,8 @@ export async function run(): Promise<void> {
 
     console.log(github.context.eventName)
 
-    if (github.context.eventName !== 'pull_request')
-      throw new Error('Not a pull request')
+    // This action only works on pull_request events.
+    if (github.context.eventName !== 'pull_request') return
 
     const { data: pull_request } = await octokit.rest.pulls.get({
       owner: github.context.repo.owner,
