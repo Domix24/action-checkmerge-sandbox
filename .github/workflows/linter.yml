@@ -73,7 +73,7 @@ jobs:
 
       - name: Upload Linter Artifacts
         if: failure() && steps.super-linter.outcome == 'failure'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: linter-reports
           path: ${{ github.workspace }}
